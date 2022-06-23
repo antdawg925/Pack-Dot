@@ -1,0 +1,168 @@
+<html>
+<head>
+    <title>Packman</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .row{
+            line-height: 0;
+        }
+        .wall {
+        background-color: rgb(76, 222, 96);
+        height: 40px;
+        width:40px;
+        display: inline-block;
+        }
+        .coin {
+        background-color: black;
+        height: 40px;
+        width:40px;
+        display: inline-block;
+        background-image: url('star.gif');
+        background-size: contain;
+        }
+        .blank {
+        background-color: white;
+        height: 40px;
+        width:40px;
+        display: inline-block;
+        }
+        #ninjaMan {
+        height: 40px;
+        width:40px;
+        background-image: url('PacMan.gif');
+        background-size: contain; 
+        position: absolute;
+        left: 40px;
+        top: 40px;
+        transform: rotate(0deg); 
+        
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="world"></div>
+    <div id="ninjaMan"></div>
+
+</body>
+    <script type="text/javascript">
+
+        //----------------------------------------------   DYNAMIC ARENA  ------------------------------------------------------------------------------
+        var world = [
+            [1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,0,2,2,2,2,2,2,2,2,2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,2,2,2,2,2,2,2,2,2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,Math.round(Math.random() + 1 ),Math.round(Math.random() + 1 ),2,1],
+            [1,2,2,2,2,2,2,2,2,2,2,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1]
+            
+        ];
+
+        //----------------------------------------------   HARDCODED ARENA  ------------------------------------------------------------------------------
+        // var world = [
+        //     [1,1,1,1,1,1,1,1,1],
+        //     [1,0,2,2,2,2,2,2,1],
+        //     [1,2,1,2,1,2,1,1,1],
+        //     [1,2,1,2,1,2,1,1,1],
+        //     [1,2,1,2,2,2,2,2,1],
+        //     [1,2,1,2,1,2,1,2,1],
+        //     [1,2,2,2,1,2,1,2,1],
+        //     [1,2,1,2,2,2,2,2,1],
+        //     [1,2,1,2,1,2,1,2,1],
+        //     [1,2,1,2,1,2,1,2,1],
+        //     [1,2,2,2,2,2,2,2,1],
+        //     [1,2,1,2,1,2,1,2,1],
+        //     [1,2,2,2,1,2,2,2,1],
+        //     [1,1,1,1,1,1,1,1,1]
+        // ];
+
+        //----------------------------------------------   TO DESCRIBE AREA OF ARENA  ----------------------------------------------------------------------
+
+        var worldDict={
+            0:'blank',
+            1:'wall',
+            2:'coin'
+        }
+        function drawWorld(){
+            output="";
+
+            for(var row=0; row< world.length; row++){
+                output += "<div class = 'row'>"
+                for(var x =0; x< world[row].length; x++){
+                    output += "<div class = '" + worldDict[world[row][x]] +"'></div>"
+                    // worldDict[world[row][x]]
+                }
+                output +="</div>"
+            }
+
+            document.getElementById('world').innerHTML= output;
+        }
+        drawWorld()
+
+        var ninjaMan={
+            x:1,
+            y:1
+        }
+
+        //----------------------------------------------   ADJUSTS PLACEMENT OF PACKMAN IN ARENA  -------------------------------------------------------------
+
+        function drawNinjaMan(){
+            document.getElementById('ninjaMan').style.top=
+                ninjaMan.y *40 + 'px'
+            document.getElementById('ninjaMan').style.left=
+                ninjaMan.x *40 + 'px'
+        }
+        drawNinjaMan()
+        //----------------------------------------------   CONTROLLERS FOR PACKMAN  ---------------------------------------------------------------------------
+  
+        document.onkeydown = function(e){
+            if (e.keyCode == 37) { // LEFT
+                if(world[ninjaMan.y][ninjaMan.x-1] != 1){
+                    ninjaMan.x--;
+                  
+                }   
+            }
+            else if (e.keyCode == 39 && ninjaMan.x <10) { // RIGHT
+                if(world[ninjaMan.y][ninjaMan.x+1] != 1){
+                    ninjaMan.x++;
+                   
+                }                    
+            }
+            else if (e.keyCode == 40 && ninjaMan.y <19) { // DOWN  
+                    if(world[ninjaMan.y+1][ninjaMan.x] != 1){
+                    ninjaMan.y++;
+                }               
+            } else if(e.keyCode == 38 && ninjaMan.y >1 ){//UP
+                    if(world[ninjaMan.y-1][ninjaMan.x] != 1){
+                    ninjaMan.y--;
+                }
+            }
+            world[ninjaMan.y][ninjaMan.x] = 0;
+
+            drawNinjaMan()
+            drawWorld()
+        }
+
+
+    </script>
+
+</html>
